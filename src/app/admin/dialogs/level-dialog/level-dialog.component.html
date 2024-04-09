@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>{{data?'EDICION':'CREACION'}} NIVEL</h2>
+<mat-dialog-content class="mat-typography">
+            <form [formGroup]="FormLevel">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Nivel</mat-label>
+                            <input formControlName="nivel" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Sueldo</mat-label>
+                            <input formControlName="sueldo" matInput>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="card w-100">
+                    <div class="card-body">
+                      <h4 class="card-title">Aportes Patronales</h4>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-label>CNS</mat-label>
+                                    <input formControlName="cajaSalud" matInput placeholder="0.1">
+                                </mat-form-field>
+                            </div>  
+                
+                            <div class="col-sm-6">
+                                <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-label>Solidario</mat-label>
+                                    <input formControlName='solidario' matInput placeholder="0.03">
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="col-sm-6">
+                                <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-label>Profesional</mat-label>
+                                    <input formControlName='profecional' matInput placeholder="0.0171">
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="col-sm-6">
+                                <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-label>Pro Vivienda</mat-label>
+                                    <input formControlName='proVivienda' matInput placeholder="0.02">
+                                </mat-form-field>
+                            </div>
+                            
+                        </div>
+                    </div>
+                  </div>
+                             
+            </form>
+         
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-flat-button color="warn" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary" mat-button [disabled]="FormLevel.invalid"
+        (click)="guardar()">Guardar</button>
+</mat-dialog-actions>

@@ -1,0 +1,741 @@
+
+
+<mat-tab-group>
+    <mat-tab label="Escala Salarial Item">
+        <div class="container-fluid">
+            <div class="example-container mat-elevation-z8">
+                <div class="example-table-container">
+                    <p>
+                        <mat-toolbar>
+                            <span class="tam-head">Global Escala Salarial</span>
+                            <div style="display: flex; align-items: center;">
+                                <button (click)="exportToExcel([dataSource, dataSource2], [displayedColumns, displayedColumns2], ['archivo1.xlsx', 'archivo2.xlsx'])" mat-icon-button>
+                                <mat-icon style="color: royalblue;">download</mat-icon>
+                                </button>   
+                            </div>
+                        </mat-toolbar>
+                    </p> 
+
+                    <table mat-table [dataSource]="dataSource">
+                        <ng-container matColumnDef="_id">
+                            <th mat-header-cell *matHeaderCellDef> Nivel Salarial </th>
+                            <td mat-cell *matCellDef="let element">{{ element?._id === 1 ? 'nivel 1' : 'nivel ' + element?._id }} </td>              
+                        </ng-container>
+        
+                        <ng-container matColumnDef="cantidadCargos">
+                            <th mat-header-cell *matHeaderCellDef>N° Items </th>
+                            <td mat-cell *matCellDef="let element"> {{element?.cantidadCargos}} </td>
+                        </ng-container>
+        
+                        
+                        <ng-container matColumnDef="sueldoBase">
+                            <th mat-header-cell *matHeaderCellDef>Haber Basico </th>
+                            <td mat-cell *matCellDef="let element"> {{element?.sueldoBase|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="totalSueldoMensual">
+                            <th mat-header-cell *matHeaderCellDef>Sueldo Mensual</th>
+                            <td mat-cell *matCellDef="let element"> {{element?.totalSueldoMensual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="totalSueldoAnual">
+                            <th mat-header-cell *matHeaderCellDef>Sueldo Anual</th>
+                            <td mat-cell *matCellDef="let element"> {{element?.totalSueldoAnual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter </td>
+                        </tr>
+                    </table>
+                    <mat-paginator #paginatorEscSal="matPaginator"
+                        [pageSizeOptions]="[6, 10, 25]" aria-label="Select page">
+                    </mat-paginator>
+                </div>
+            </div>
+        
+            <div class="example-container mat-elevation-z8">
+                <div class="example-table-container">
+                    <table mat-table [dataSource]="dataSource2">
+                        <ng-container matColumnDef="_id">
+                            <th mat-header-cell *matHeaderCellDef> Total  Niveles </th>
+                            <td mat-cell *matCellDef="let element">{{element?.totalCantidadNiveles}}</td>              
+                        </ng-container>
+        
+                        <ng-container matColumnDef="cantidadCargos">
+                            <th mat-header-cell *matHeaderCellDef>N° Items </th>
+                            <td mat-cell *matCellDef="let element"> {{element?.totalCantidadCargos}} </td>
+                        </ng-container>
+        
+                        
+                        <ng-container matColumnDef="sueldoBase">
+                            <th mat-header-cell *matHeaderCellDef>Haber Basico </th>
+                            <td mat-cell *matCellDef="let element"> {{element?.totalSueldo|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="totalSueldoMensual">
+                            <th mat-header-cell *matHeaderCellDef>Sueldo Mensual</th>
+                            <td mat-cell *matCellDef="let element"> {{element?.totalSueldoMensual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="totalSueldoAnual">
+                            <th mat-header-cell *matHeaderCellDef>Sueldo Anual</th>
+                            <td mat-cell *matCellDef="let element"> {{element?.totalSueldoAnual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter </td>
+                        </tr>
+                    </table>
+                    
+        
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Items">
+        <div class="container-fluid">           
+            <div class="example-container mat-elevation-z8">
+                <div class="example-table-container">
+                    <p>
+                        <mat-toolbar>
+                            <span class="tam-head">Tabla de Distribucion Personal y Sueldos Item</span>
+                            <div style="display: flex; align-items: center;">
+                                <button (click)="exportToExcel([dataSource7, dataSource5], [displayedColumns7, displayedColumns5], ['archivo1.xlsx', 'archivo2.xlsx'])" mat-icon-button>
+                                <mat-icon style="color: royalblue;">download</mat-icon>
+                                </button>   
+                            </div>
+                        </mat-toolbar>
+                    </p>                   
+                    <table mat-table [dataSource]="dataSource7">
+                        <ng-container matColumnDef="nombre">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Cargo </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.nombre}}</td>              
+                        </ng-container>
+        
+                        <ng-container matColumnDef="tipoContrato">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Contrato</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.tipoContrato}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="estado">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Estado</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.estado}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="nivel">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Nivel</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.nivel}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="sueldoMensual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Sueldo Mensual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.sueldoMensual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="sueldoAnual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Sueldo Anual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.sueldoAnual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="Aguinaldo">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Aguinaldo</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Aguinaldo|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="CNS">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">CNS</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.CNS|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="AFP">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">AFP</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.AFP|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="proVivienda">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Pro Viv.</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.proVivienda|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="AporteSolidario">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Solidario</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.AporteSolidario|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalAportes">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total Aportes</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAportes|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Total" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Total|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns7"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns7;"></tr>
+        
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter </td>
+                        </tr>
+                    </table>
+                    <mat-paginator #paginatorItems="matPaginator"
+                        [pageSizeOptions]="[6, 20, 30]" aria-label="Select page">
+                    </mat-paginator>  
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">           
+            <div class="example-container mat-elevation-z8">
+                <div class="example-table-container">                   
+                    <table mat-table [dataSource]="dataSource5">
+                        <ng-container matColumnDef="DatosGenerales">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Datos Totales </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> </td>              
+                        </ng-container>
+        
+                        <ng-container matColumnDef="TotalItems">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> N° Items</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalItems}}  </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="TotalSueldoMensual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Sueldo Mensual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalSueldoMensual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="TotalSueldoAnual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Sueldo Anual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalSueldoAnual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="TotalAguinaldo">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Aguinaldo</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAguinaldo|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="TotalCNS">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">CNS</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalCNS|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalAFP">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">AFP</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAFP|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalProVivienda">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Pro Viv.</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalProVivienda|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalAporteSolidario">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Solidario</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAporteSolidario|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalAportes">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total Aportes</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAportes|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalTotal" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalTotal|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns5"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns5;"></tr>
+        
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Eventual"> 
+        <div class="container-fluid"> 
+            <div class="example-container mat-elevation-z8">
+                <div class="example-table-container">
+                    <p>
+                        <mat-toolbar>
+                            <span class="tam-head">Tabla de Distribucion Personal y Sueldos Eventual
+                            </span>
+                            <div style="display: flex; align-items: center;">
+                                <button (click)="exportToExcel([dataSource8, dataSource10], [displayedColumns9, displayedColumns5], ['archivo1.xlsx', 'archivo2.xlsx'])" mat-icon-button>
+                                <mat-icon style="color: royalblue;">download</mat-icon>
+                                </button>   
+                            </div>
+                        </mat-toolbar>
+                    </p>
+                    <table mat-table [dataSource]="dataSource8">
+                        <ng-container matColumnDef="nombre" sticky>
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Cargo </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.nombre}}</td>              
+                        </ng-container>
+        
+                        <ng-container matColumnDef="tipoContrato">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Contrato</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.tipoContrato}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="estado">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Estado</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.estado}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="nivel">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Nivel</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.nivel}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="sueldoMensual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Sueldo Mensual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.sueldoMensual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="sueldoAnual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Sueldo Anual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.sueldoAnual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="Aguinaldo">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Aguinaldo</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Aguinaldo|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="CNS">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">CNS</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.CNS|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="AFP">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">AFP</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.AFP|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="proVivienda">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Pro Viv.</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.proVivienda|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="AporteSolidario">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Solidario</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.AporteSolidario|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalAportes">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total Aportes</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAportes|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Total" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Total|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns8"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns8;"></tr>
+        
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter </td>
+                        </tr>
+                    </table>
+                    <mat-paginator #paginatorEventuales="matPaginator"
+                        [pageSizeOptions]="[6, 25, 50]" aria-label="Select page">
+                    </mat-paginator> 
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">           
+            <div class="example-container mat-elevation-z8">
+                <div class="example-table-container">                   
+                    <table mat-table [dataSource]="dataSource10">
+                        <ng-container matColumnDef="DatosGenerales">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Datos Totales </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> </td>              
+                        </ng-container>
+        
+                        <ng-container matColumnDef="TotalItems">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> N° Eventuales</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalItems}}  </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="TotalSueldoMensual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Sueldo Mensual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalSueldoMensual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="TotalSueldoAnual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Sueldo Anual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalSueldoAnual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="TotalAguinaldo">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Aguinaldo</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAguinaldo|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="TotalCNS">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">CNS</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalCNS|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalAFP">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">AFP</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAFP|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalProVivienda">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Pro Viv.</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalProVivienda|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalAporteSolidario">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Solidario</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAporteSolidario|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalAportes">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total Aportes</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAportes|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalTotal" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalTotal|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns5"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns5;"></tr>
+        
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Eventual Por Partida"> 
+        <div class="container-fluid"> 
+            <div class="example-container mat-elevation-z8">
+                <div class="example-table-container">
+                    <p>
+                        <mat-toolbar>
+                            <span class="tam-head">Global Eventual por Partida Presupuestaria</span>
+                            <div style="display: flex; align-items: center;">
+                                <button (click)="exportToExcel([dataSource3, dataSource12], [displayedColumns3, displayedColumns3], ['archivo1.xlsx', 'archivo2.xlsx'])" mat-icon-button>
+                                <mat-icon style="color: royalblue;">download</mat-icon>
+                                </button>   
+                            </div>
+                        </mat-toolbar>
+                    </p>
+                    <table mat-table [dataSource]="dataSource3">
+                        <ng-container matColumnDef="nombrePartida" >
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Partida presupuestaria</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table">{{element?.codPartida}} {{element?.nombrePartida}}</td>              
+                        </ng-container>
+        
+                        <ng-container matColumnDef="cantidadCargos">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">N° Cargos </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.cantidadCargos}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="sueldoMensual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Sueldo Mensual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.sueldoMensual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="sueldoAnual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Sueldo Anual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.sueldoAnual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="Aguinaldo">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Aguinaldo</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Aguinaldo|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="CNS">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >CNS</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.CNS|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="AFP">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >AFP</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.AFP|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="proVivienda">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Pro Viv.</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.proVivienda|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="AporteSolidario">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Solidario</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.AporteSolidario|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="TotalAportes">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Total Aportes</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAportes|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Total" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Total</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Total|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+        
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter </td>
+                        </tr> 
+                    </table>  
+                    <mat-paginator #paginatorParPre="matPaginator"
+                        [pageSizeOptions]="[6, 10, 25, 100]" aria-label="Select page">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid"> 
+            <div class="example-container mat-elevation-z8">
+                <div class="example-table-container">
+                    <table mat-table [dataSource]="dataSource12">
+                        <ng-container matColumnDef="nombrePartida" >
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total de partidas presupuestarias</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table">{{element?.cantidadPartidas}}</td>              
+                        </ng-container>
+        
+                        <ng-container matColumnDef="cantidadCargos">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">N° Cargos </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.cantidadCargos}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="sueldoMensual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Sueldo Mensual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.sueldoMensual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="sueldoAnual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Sueldo Anual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.sueldoAnual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="Aguinaldo">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Aguinaldo</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Aguinaldo|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="CNS">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >CNS</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.CNS|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="AFP">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >AFP</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.AFP|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="proVivienda">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Pro Viv.</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.proVivienda|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="AporteSolidario">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Solidario</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.AporteSolidario|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="TotalAportes">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Total Aportes</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAportes|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Total" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Total</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Total|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+        
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter </td>
+                        </tr> 
+                    </table>  
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Global Salarios por Secretarias">
+        <div class="container-fluid">           
+            <div class="example-container mat-elevation-z8">
+                <div class="example-table-container">
+                    <p>
+                        <mat-toolbar>
+                            <span class="tam-head">Tabla de Distribucion Personal y Sueldos por Secretaria</span>
+                            <div style="display: flex; align-items: center;">
+                                <button (click)="exportToExcel([dataSource6, dataSource11], [displayedColumns6, displayedColumns6], ['archivo1.xlsx', 'archivo2.xlsx'])" mat-icon-button>
+                                <mat-icon style="color: royalblue;">download</mat-icon>
+                                </button>   
+                            </div>
+                        </mat-toolbar>
+                    </p>                
+                    <table mat-table [dataSource]="dataSource6">
+                        <ng-container matColumnDef="nombreSecretaria" >
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Secretaria </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table">{{element?.nombreSecretaria}} </td>              
+                        </ng-container>
+        
+                        <ng-container matColumnDef="cantidadCargos">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">N° Cargos </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.cantidadCargos}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="cantidadItem">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">N° Items </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table" > {{element?.cantidadItem}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="cantidadContrato">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">N° Eventuales </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.cantidadContrato}} </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="sueldoMensual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Sueldo Mensual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.sueldoMensual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="sueldoAnual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Sueldo Anual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.sueldoAnual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="Aguinaldo">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Aguinaldo</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Aguinaldo|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="CNS">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >CNS</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.CNS|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="AFP">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >AFP</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.AFP|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="proVivienda">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Pro Viv.</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.proVivienda|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="AporteSolidario">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Solidario</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.AporteSolidario|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="TotalAportes">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Total Aportes</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAportes|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Total" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Total</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Total|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns6"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns6;"></tr>
+        
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter </td>
+                        </tr>
+                    </table>   
+                    <mat-paginator #paginatorPorSec="matPaginator"
+                        [pageSizeOptions]="[7, 10, 25]" aria-label="Select page">
+                    </mat-paginator> 
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">           
+            <div class="example-container mat-elevation-z8">
+                <div class="example-table-container">
+                    <table mat-table [dataSource]="dataSource11">
+                        <ng-container matColumnDef="nombreSecretaria" >
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Total Secretarias </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table">{{element?.cantidadSecretaria}} </td>              
+                        </ng-container>
+        
+                        <ng-container matColumnDef="cantidadCargos">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">N° Cargos </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.cantidadCargos}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="cantidadItem">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">N° Items </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table" > {{element?.cantidadItem}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="cantidadContrato">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">N° Eventuales </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.cantidadContrato}} </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="sueldoMensual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Sueldo Mensual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.sueldoMensual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="sueldoAnual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Sueldo Anual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.sueldoAnual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="Aguinaldo">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Aguinaldo</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Aguinaldo|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="CNS">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >CNS</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.CNS|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="AFP">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >AFP</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.AFP|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="proVivienda">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Pro Viv.</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.proVivienda|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="AporteSolidario">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Solidario</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.AporteSolidario|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="TotalAportes">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Total Aportes</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAportes|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Total" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title" >Total</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Total|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns6"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns6;"></tr>
+        
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter </td>
+                        </tr>
+                    </table>   
+                    
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    
+</mat-tab-group>
+

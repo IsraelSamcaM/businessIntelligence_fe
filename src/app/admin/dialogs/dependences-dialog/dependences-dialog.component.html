@@ -1,0 +1,82 @@
+<h2 mat-dialog-title>{{data?'EDICION':'CREACION'}} DEPENDENCIAS </h2>
+<mat-dialog-content class="mat-typography">
+            <form [formGroup]="FormDependence">
+                  <div class="row">
+                    <div class="col-lg-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-sm-12">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Nombre</mat-label>
+                                        <input formControlName="nombre" matInput>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-12">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Sigla</mat-label>
+                                        <input formControlName="sigla" matInput>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="row">
+                                        <div *ngIf="!noDependence" class="col-sm-8">
+                                            <app-sever-mat-select [initialValue]="data?data.depende_de:null"
+                                                [placeholder]="'Buscar cargo dependencia'" [pathPropertyOfObjectDisplay]="'nombre'"
+                                                [data]="availableDependences" (eventSelectedOption)="selectDependence($event)"
+                                                (eventSearch)="searchDependence($event)">
+                                            </app-sever-mat-select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <mat-checkbox (change)="removeDependence()" [(ngModel)]="noDependence" [ngModelOptions]="{standalone:true}" class="example-margin">
+                                                Sin dependencia
+                                            </mat-checkbox>
+                                        </div>
+                                </div> 
+                                <div class="row">   
+                                    <div *ngIf="!noJob" class="col-sm-8">
+                                        <app-sever-mat-select [initialValue]="data?data.encargado:null"
+                                            [placeholder]="'Buscar cargo encargado'" [pathPropertyOfObjectDisplay]="'nombre'"
+                                            [data]="availableJobs" (eventSelectedOption)="selectJob($event)"
+                                            (eventSearch)="searchJob($event)">
+                                        </app-sever-mat-select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <mat-checkbox (change)="removeJob()" [(ngModel)]="noJob" [ngModelOptions]="{standalone:true}" class="example-margin">
+                                            Sin encargado
+                                        </mat-checkbox>
+                                    </div>
+                                </div>
+
+                            </div>                   
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <mat-chip-listbox aria-label="Fish selection" formControlName="estado">
+                                    <mat-chip-option color="primary" [value] = 'true'> Habilitado </mat-chip-option>
+                                    <mat-chip-option color="warn" [value] = 'false'> Deshabilitado</mat-chip-option>
+                                </mat-chip-listbox>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Tipo: </h4>
+                                <mat-radio-group aria-label="Select an option" class="vertical-radio-group" ng model formControlName="tipo" >
+                                    <mat-radio-button value="SECRETARIA">Secretaria</mat-radio-button>
+                                    <mat-radio-button value="JEFATURA">Jefatura</mat-radio-button>
+                                    <mat-radio-button value="DIRECCION">Direccion</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            
+            </form>
+         
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-flat-button color="warn" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary" mat-button [disabled]="FormDependence.invalid"
+        (click)="guardar()">Guardar</button>
+</mat-dialog-actions>

@@ -1,0 +1,30 @@
+mat-list {
+    flex-grow: 1;
+    border: 1px solid;
+    overflow: auto;
+    height: 300px;
+}
+
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+
+
+/* Estilo para la lista de chips */
+.mat-chip-listbox {
+  display: flex;
+  flex-direction: column; /* Cambia la dirección del flujo a columnas */
+}
+
+/* Estilo para los chips individuales (opciones) */
+.mat-chip-option {
+  margin-bottom: 10px; /* Espacio entre los chips (opciones) */
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,79 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+[data-l-id] path {
+    stroke-width: 3px;
+    stroke: #2B2D42;
+}
+
+[data-n-id] rect {
+    fill: #DDE2CD;
+}
+
+[data-n-id] rect:hover {
+    filter: drop-shadow(4px 5px 5px #aeaeae);
+}
+
+.field_0 {
+    font-family: Cambria;
+    font-family: Impact;
+    text-transform: uppercase;
+    fill: #000000;
+    text-anchor: middle; 
+}
+
+.field_1 {
+    font-family: Arial;
+    text-transform: uppercase;
+    fill: #0c0a0a;
+    text-anchor: middle; 
+    white-space: pre-line;
+    word-wrap: break-word; 
+}
+  
+
+.node.no-user rect {
+    fill: #000000;
+}
+
+.node.no-user text {
+    fill: rgb(51, 41, 41);
+}
+
+.node.item rect {
+    fill: #DDE2CD;
+}
+.node.eventual rect {
+    fill: #93CDDD;
+}  
+.node.ascenso rect {
+    fill: #B7FD71;
+}
+.node.creacion rect {
+    fill: #799540;
+} 
+.node.reubicacion rect {
+    fill: #FFFF00;
+}
+.node.descenso rect {
+    fill: #F2DCDA;
+} 
+.node.eliminacion rect {
+    fill: #FF0000;
+} 
+  
+    
+

@@ -1,0 +1,104 @@
+
+<p>
+    <mat-toolbar>
+        <span>DEPENDENCIAS</span>
+        <span class="example-spacer"></span>
+        <button (click)="add()" mat-icon-button class="example-icon favorite-icon"
+            aria-label="Example icon-button with heart icon">
+            <mat-icon>add</mat-icon>
+        </button>
+        
+    </mat-toolbar>
+</p>
+
+<div class="container-fluid"> 
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Buscar dependencias</mat-label>
+        <input matInput [(ngModel)]="text" (keyup)="applyFilter($event)" placeholder="Nombre / Sigla "
+            #input>
+        <button *ngIf="text" matSuffix mat-icon-button aria-label="Clear" (click)="cancelSearch()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <div class="example-container mat-elevation-z8">
+        <div class="example-table-container">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                    <td mat-cell *matCellDef="let element"> {{ element?.nombre }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="sigla">
+                    <th mat-header-cell *matHeaderCellDef> Sigla </th>
+                    <td mat-cell *matCellDef="let element"> {{element?.sigla}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="depende_de">
+                    <th mat-header-cell *matHeaderCellDef> Depende de </th>
+                    <td mat-cell *matCellDef="let element">
+                        <ng-container *ngIf="element.depende_de; else noDependenceTemplate">
+                            {{element.depende_de.nombre}}
+                        </ng-container>
+                        <ng-template #noDependenceTemplate>
+                            <span style="color: red;">SIN DEPENDENCIA</span>
+                        </ng-template>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="encargado">
+                    <th mat-header-cell *matHeaderCellDef> Encargado </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <ng-container *ngIf="element.encargado; else noEncargadoTemplate">
+                            {{element.encargado.nombre}}
+                        </ng-container>
+                        <ng-template #noEncargadoTemplate>
+                            <span style="color: red;">SIN ENCARGADO</span>
+                        </ng-template>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="tipo">
+                    <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                    <td mat-cell *matCellDef="let element"> {{element?.tipo}} 
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef> Estado </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <span *ngIf="element?.estado === true ">
+                            <span class="badge bg-success">Habilitado</span>
+                        </span>
+                        <span *ngIf="element?.estado === false ">
+                            <span class="badge bg-danger">Deshabilitado</span>
+                        </span>
+                    </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="options">
+                    <th mat-header-cell *matHeaderCellDef>Options</th>
+                    <td mat-cell *matCellDef="let element">
+                      <div style="display: flex; align-items: center;">
+                        <button (click)="Edit(element)" mat-icon-button>
+                          <mat-icon style="color: royalblue;">edit</mat-icon>
+                        </button>
+                  
+                      </div>
+                    </td>
+                </ng-container>
+                                
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<p>
+    <span class="example-spacer"></span>
+</p>

@@ -1,0 +1,86 @@
+
+<p>
+    <mat-toolbar>
+        <span>PARTIDAS PRESUPUESTARIAS</span>
+        <span class="example-spacer"></span>
+        <button (click)="add()" mat-icon-button class="example-icon favorite-icon"
+            aria-label="Example icon-button with heart icon">
+            <mat-icon>add</mat-icon>
+        </button>
+        
+    </mat-toolbar>
+</p>
+
+<div class="container-fluid"> 
+    <mat-form-field class="example-full-width">
+        <mat-label>Buscar partida presupuestaria</mat-label>
+        <input matInput [(ngModel)]="text" (keyup)="applyFilter($event)" placeholder="Codigo / Nombre de la partida "
+            #input>
+        <button *ngIf="text" matSuffix mat-icon-button aria-label="Clear" (click)="cancelSearch()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <div class="example-container mat-elevation-z8">
+         <div class="example-table-container">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="codigo">
+                    <th mat-header-cell *matHeaderCellDef> Código</th>
+                    <td mat-cell *matCellDef="let element"> {{ element?.codigo}} </td>     
+                </ng-container >
+                
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef> Nombre Partida de Presupuestaria</th>
+                    <td mat-cell *matCellDef="let element"> {{element?.nombrePartida }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fuenteFinanciamiento">
+                    <th mat-header-cell *matHeaderCellDef> Fuente de Financiaminento </th>
+                    <td mat-cell *matCellDef="let element"> {{element?.fuenteFinanciamiento}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="organismoFinanciador">
+                    <th mat-header-cell *matHeaderCellDef> Organismo Financiador </th>
+                    <td mat-cell *matCellDef="let element"> {{element?.organismoFinanciador}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="activo">
+                    <th mat-header-cell *matHeaderCellDef> Estado  </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element?.activo === true ">
+                            <span class="badge bg-success">Habilitado</span>
+                        </span>
+                        <span *ngIf="element?.activo === false ">
+                            <span class="badge bg-danger">Deshabilitado</span>
+                        </span>
+                    </td>   
+                </ng-container>
+
+
+                <ng-container matColumnDef="options">
+                    <th mat-header-cell *matHeaderCellDef>Options</th>
+                    <td mat-cell *matCellDef="let element">
+                      <div style="display: flex; align-items: center;">
+                        <button (click)="Edit(element)" mat-icon-button>
+                          <mat-icon style="color: royalblue;">edit</mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                </ng-container>
+                                
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter </td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[9, 20, 50]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </div>
+</div>
+<p>
+    <span class="example-spacer"></span>
+</p>

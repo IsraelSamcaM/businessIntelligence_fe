@@ -1,0 +1,53 @@
+
+<p>
+    <mat-toolbar>
+        <div class="row">
+            <div class="col-sm-12">
+                <span>FUNCIONARIOS ASIGNADOS</span>
+                <span class="example-spacer"></span>
+            </div>
+        </div>
+    </mat-toolbar>
+</p>
+<div class="container-fluid"> 
+    <div class="example-container mat-elevation-z8">
+        <div class="example-table-container">
+            <table mat-table [dataSource]="dataSource">
+                
+                <ng-container matColumnDef="funcionario">
+                    <th mat-header-cell *matHeaderCellDef> Funcionario asignado al cargo</th>
+                    <td mat-cell *matCellDef="let element"> {{element.funcionario_id.nombre}} {{element.funcionario_id.paterno}} {{element.funcionario_id.materno}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef> Fecha de asignación</th>
+                    <td mat-cell *matCellDef="let element"> {{element?.fecha_rotacion}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="hora">
+                    <th mat-header-cell *matHeaderCellDef> Hora de asignación<th>
+                    <td mat-cell *matCellDef="let element"> {{element?.hora_rotacion}} </td>
+                </ng-container>
+                             
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">El cargo no tuvo ninguna asignación </td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </div>
+    <div>
+        <p><span class="example-spacer"></span></p>
+        <p>EL CARGO FUE ASIGNADO: {{ numRotation }} VECES</p>
+    </div>
+</div>
+
+<mat-dialog-actions align="end">
+    <button mat-flat-button color="warn" mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>
+

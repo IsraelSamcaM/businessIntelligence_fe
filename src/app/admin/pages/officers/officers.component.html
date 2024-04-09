@@ -1,0 +1,109 @@
+
+<p>
+    <mat-toolbar>
+        <span>FUNCIONARIOS</span>
+        <span class="example-spacer"></span>
+        <button (click)="Add()" mat-icon-button class="example-icon favorite-icon"
+            aria-label="Example icon-button with heart icon">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-toolbar>
+</p>
+<div class="container-fluid">
+    <mat-form-field class="example-full-width">
+        <mat-label>Buscar funcionario</mat-label>
+        <input matInput [(ngModel)]="text" (keyup)="applyFilter($event)" placeholder="Nombre / Paterno / Materno / DNI"
+            #input>
+        <button *ngIf="text" matSuffix mat-icon-button aria-label="Clear" (click)="cancelSearch()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    
+    <div class="example-container mat-elevation-z8">
+        <div class="example-table-container">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombre}} {{element.paterno}} {{element.materno}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dni">
+                    <th mat-header-cell *matHeaderCellDef> DNI </th>
+                    <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cargo">
+                    <th mat-header-cell *matHeaderCellDef> Cargo </th>
+                    <td mat-cell *matCellDef="let element">
+                        <ng-container *ngIf="element.cargo; else noJobTemplate">
+                            {{element.cargo.nombre}}
+                        </ng-container>
+                        <ng-template #noJobTemplate>
+                            <span style="color: red;">SIN CARGO</span>
+                        </ng-template>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="telefono">
+                    <th mat-header-cell *matHeaderCellDef> Telefono </th>
+                    <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="activo">
+                    <th mat-header-cell *matHeaderCellDef> Situacion </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span *ngIf="element?.activo == true">
+                        <span class="badge bg-success">Habilitado</span>
+                      </span>
+                      <span *ngIf="element?.activo == false ">
+                        <span class="badge bg-danger">Deshabilitado</span>
+                      </span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="opciones">
+                    <th mat-header-cell *matHeaderCellDef> </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="Edit(element)">
+                                <mat-icon style="color: royalblue;">edit</mat-icon>
+                                <span>Editar funcionario</span>
+                            </button>
+                            <button mat-menu-item (click)="Rotation(element)">
+                                <mat-icon style="color: royalblue;">list</mat-icon>
+                                <span>Rotaciones del funcionario</span>
+                            </button>
+                            <button mat-menu-item (click)="delete(element)">
+                                <ng-container *ngIf="element.activo; else inactivoTemplate">
+                                    <mat-icon style="vertical-align: middle;" style="color: brown;">delete</mat-icon>
+                                    <span>Eliminar funcionario</span>
+                                </ng-container>
+                                <ng-template #inactivoTemplate>
+                                    <mat-icon style="color: green;">restart_alt</mat-icon>
+                                    <span>Habilitar funcionario</span>
+                                </ng-template>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[9, 20, 50]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </div>
+</div>
+<p>
+    <span class="example-spacer"></span>
+</p>
