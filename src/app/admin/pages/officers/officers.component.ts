@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { OfficerDialogComponent } from '../../dialogs/officer-dialog/officer-dialog.component';
-import { RotationOfficerDialogComponent } from '../../dialogs/rotation-officer-dialog/rotation-officer-dialog.component';
 
 @Component({
   selector: 'app-officers',
@@ -72,12 +71,12 @@ export class OfficersComponent {
     });
   }
 
-  Rotation(officer: any) {
-    const dialogRef = this.dialog.open(RotationOfficerDialogComponent, {
-      width: '1000px',
-      data: officer
-    })
-  }
+  // Rotation(officer: any) {
+  //   const dialogRef = this.dialog.open(RotationOfficerDialogComponent, {
+  //     width: '1000px',
+  //     data: officer
+  //   })
+  // }
 
   delete(officer: any) {
     this.funcionariosService.delete(officer._id).subscribe(newOfficer => {

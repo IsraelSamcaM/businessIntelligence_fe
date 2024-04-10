@@ -73,10 +73,10 @@
                                 <mat-icon style="color: royalblue;">edit</mat-icon>
                                 <span>Editar funcionario</span>
                             </button>
-                            <button mat-menu-item (click)="Rotation(element)">
+                            <!-- <button mat-menu-item (click)="Rotation(element)">
                                 <mat-icon style="color: royalblue;">list</mat-icon>
                                 <span>Rotaciones del funcionario</span>
-                            </button>
+                            </button> -->
                             <button mat-menu-item (click)="delete(element)">
                                 <ng-container *ngIf="element.activo; else inactivoTemplate">
                                     <mat-icon style="vertical-align: middle;" style="color: brown;">delete</mat-icon>
